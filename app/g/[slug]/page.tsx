@@ -1,24 +1,33 @@
 import { notFound } from "next/navigation";
-import { getGroupBySlug, getGroupMemberCount, getGroupLeaderboard } from "@/lib/queries";
-import { LeaderboardTable } from "@/components/LeaderboardTable";
-import { AppStoreButtons } from "@/components/AppStoreButtons";
+import {
+  fetchGroupBySlug,
+  fetchGroupMemberCount,
+  fetchLeaderboard,
+  fetchRecentSessions,
+} from "@/lib/queries";
+import { LeaderboardSection } from "@/components/LeaderboardSection";
+import { SessionCard } from "@/components/SessionCard";
+import { CTABanner } from "@/components/CTABanner";
+import { StickyHeader } from "@/components/StickyHeader";
 import type { Metadata } from "next";
 
-export const revalidate = 300; // ISR: 5 minutes
+export const revalidate = 300;
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const group = await getGroupBySlug(slug);
+  const group = await fetchGroupBySlug(slug);
   if (!group) return { title: "Group Not Found" };
+
+  const memberCount = await fetchGroupMemberCount(group.id);
 
   return {
     title: `${group.name} — Semi Bluff`,
-    description: `Leaderboard for ${group.name} on Semi Bluff`,
+    description: `All-time leaderboard for ${group.name}. ${memberCount} members.`,
     openGraph: {
-      title: `${group.name} — Leaderboard`,
-      description: `Leaderboard for ${group.name} on Semi Bluff`,
+      title: `${group.name} — Semi Bluff`,
+      description: `All-time leaderboard for ${group.name}. ${memberCount} members.`,
       images: [`/api/og/group/${slug}`],
     },
   };
@@ -26,45 +35,56 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function GroupPage({ params }: Props) {
   const { slug } = await params;
-  const group = await getGroupBySlug(slug);
+  const group = await fetchGroupBySlug(slug);
   if (!group) notFound();
 
-  const [memberCount, leaderboard] = await Promise.all([
-    getGroupMemberCount(group.id),
-    getGroupLeaderboard(group.id),
+  const [memberCount, leaderboard, recentSessions] = await Promise.all([
+    fetchGroupMemberCount(group.id),
+    fetchLeaderboard(group.id),
+    fetchRecentSessions(group.id),
   ]);
 
-  const totalPot = leaderboard.reduce(
-    (sum, e) => sum + Math.max(0, e.totalNet),
-    0
-  );
-
   return (
-    <main className="bg-grid min-h-screen px-4 py-12">
-      <div className="mx-auto max-w-2xl">
-        {/* Header */}
-        <div className="mb-8 text-center">
-          <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-600 text-xl">
-            🃏
-          </div>
-          <h1 className="mb-1 text-3xl font-bold tracking-tight">{group.name}</h1>
-          <p className="text-white/40">
-            {memberCount} member{memberCount !== 1 ? "s" : ""} · $
-            {totalPot.toFixed(0)} total in play
-          </p>
-        </div>
+    <>
+      <StickyHeader />
+      <main className="min-h-screen bg-bg-primary">
+        <div className="max-w-2xl mx-auto px-md py-lg">
+          {/* Group Header */}
+          <section className="mb-xl">
+            <h1 className="text-[28px] font-bold leading-[34px] text-text-primary">
+              {group.name}
+            </h1>
+            <p className="text-[13px] text-text-secondary mt-xs">
+              {memberCount} member{memberCount !== 1 ? "s" : ""}
+            </p>
+          </section>
 
-        {/* Leaderboard */}
-        <LeaderboardTable entries={leaderboard} />
+          {/* Leaderboard */}
+          <section className="mb-xl">
+            <h2 className="text-[17px] font-semibold text-text-secondary mb-md uppercase tracking-wider text-[11px]">
+              Leaderboard
+            </h2>
+            <LeaderboardSection entries={leaderboard} />
+          </section>
 
-        {/* CTA */}
-        <div className="mt-12 text-center">
-          <p className="mb-4 text-sm text-white/40">
-            Track your poker games with Semi Bluff
-          </p>
-          <AppStoreButtons />
+          {/* Recent Sessions */}
+          {recentSessions.length > 0 && (
+            <section className="mb-xl">
+              <h2 className="text-[17px] font-semibold text-text-secondary mb-md uppercase tracking-wider text-[11px]">
+                Recent Sessions
+              </h2>
+              <div className="flex flex-col gap-sm">
+                {recentSessions.map((session) => (
+                  <SessionCard key={session.id} session={session} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* CTA */}
+          <CTABanner />
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }

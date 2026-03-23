@@ -3,20 +3,45 @@
 @tailwind utilities;
 
 :root {
-  --bg: #0D0D0D;
-  --surface: #1E1E1E;
-  --accent: #7C3AED;
+  /* Backgrounds */
+  --bg-primary: #0D0D0D;
+  --bg-secondary: #1A1A1A;
+  --bg-tertiary: #242424;
+
+  /* Surfaces */
+  --surface-primary: #1E1E1E;
+  --surface-secondary: #2A2A2A;
+  --surface-elevated: #333333;
+
+  /* Text */
+  --text-primary: #FFFFFF;
+  --text-secondary: #A0A0A0;
+  --text-tertiary: #666666;
+  --text-inverse: #0D0D0D;
+
+  /* Accent */
+  --accent-primary: #7C3AED;
+  --accent-secondary: #9F67FF;
+  --accent-muted: #3D1F7A;
+
+  /* Semantic */
   --positive: #22C55E;
   --negative: #EF4444;
+  --warning: #F59E0B;
+
+  /* UI */
+  --border: #2E2E2E;
+  --divider: #1F1F1F;
+  --overlay: rgba(0, 0, 0, 0.6);
+
+  /* Medal */
+  --medal-gold: #FFD700;
+  --medal-silver: #C0C0C0;
+  --medal-bronze: #CD7F32;
 }
 
 body {
-  background: var(--bg);
-}
-
-/* Subtle grid pattern background */
-.bg-grid {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 48px 48px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }

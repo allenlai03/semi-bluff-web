@@ -1,15 +1,14 @@
-import { notFound } from "next/navigation";
-import { getGroupByInviteCode, getGroupMemberCount } from "@/lib/queries";
+import { fetchGroupByInviteCode, fetchGroupMemberCount } from "@/lib/queries";
 import { AppStoreButtons } from "@/components/AppStoreButtons";
 import type { Metadata } from "next";
 
-export const revalidate = 600; // ISR: 10 minutes
+export const revalidate = 600;
 
 type Props = { params: Promise<{ code: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { code } = await params;
-  const group = await getGroupByInviteCode(code);
+  const group = await fetchGroupByInviteCode(code);
   if (!group) return { title: "Invite — Semi Bluff" };
 
   return {
@@ -24,17 +23,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function InvitePage({ params }: Props) {
   const { code } = await params;
-  const group = await getGroupByInviteCode(code);
+  const group = await fetchGroupByInviteCode(code);
 
   if (!group) {
     return (
-      <main className="bg-grid flex min-h-screen flex-col items-center justify-center px-6">
-        <div className="mx-auto max-w-md text-center">
-          <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-xl">
+      <main className="min-h-screen bg-bg-primary flex flex-col items-center justify-center px-md">
+        <div className="max-w-md mx-auto text-center">
+          <div className="mb-lg inline-flex h-14 w-14 items-center justify-center rounded-xl bg-surface-elevated text-xl">
             ❌
           </div>
-          <h1 className="mb-2 text-2xl font-bold">Group Not Found</h1>
-          <p className="mb-8 text-white/40">
+          <h1 className="text-[20px] font-semibold leading-[26px] text-text-primary mb-sm">
+            Invalid Invite Code
+          </h1>
+          <p className="text-[15px] text-text-secondary mb-xl leading-[22px]">
             This invite link is invalid or has expired.
           </p>
           <AppStoreButtons />
@@ -43,32 +44,34 @@ export default async function InvitePage({ params }: Props) {
     );
   }
 
-  const memberCount = await getGroupMemberCount(group.id);
+  const memberCount = await fetchGroupMemberCount(group.id);
 
   return (
-    <main className="bg-grid flex min-h-screen flex-col items-center justify-center px-6">
-      <div className="mx-auto max-w-md text-center">
-        <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-600 text-xl">
+    <main className="min-h-screen bg-bg-primary flex flex-col items-center justify-center px-md">
+      <div className="max-w-md mx-auto text-center">
+        <div className="mb-lg inline-flex h-14 w-14 items-center justify-center rounded-xl bg-accent-primary text-xl">
           🃏
         </div>
-        <h1 className="mb-2 text-2xl font-bold">Join {group.name}</h1>
-        <p className="mb-2 text-white/40">
+        <h1 className="text-[20px] font-semibold leading-[26px] text-text-primary mb-xs">
+          Join {group.name}
+        </h1>
+        <p className="text-[13px] text-text-secondary mb-sm">
           {memberCount} member{memberCount !== 1 ? "s" : ""}
         </p>
-        <p className="mb-8 text-sm text-white/30">
+        <p className="text-[15px] text-text-secondary mb-xl leading-[22px]">
           You&apos;ve been invited to join this poker group on Semi Bluff.
         </p>
 
-        {/* Deep link button — Universal Links intercept if app installed */}
+        {/* Deep link button */}
         <a
           href={`https://semibluff.app/join/${code}`}
-          className="mb-4 inline-flex w-full max-w-xs items-center justify-center rounded-xl bg-violet-600 px-6 py-3.5 font-semibold text-white transition hover:bg-violet-500"
+          className="block w-full max-w-xs mx-auto bg-accent-primary rounded-lg px-md py-md font-semibold text-[15px] text-text-primary text-center transition hover:opacity-90 mb-lg"
         >
           Open in Semi Bluff
         </a>
 
-        <div className="mt-6">
-          <p className="mb-4 text-xs text-white/30 uppercase tracking-wider">
+        <div>
+          <p className="text-[11px] font-medium tracking-[0.5px] text-text-tertiary uppercase mb-md">
             Don&apos;t have the app?
           </p>
           <AppStoreButtons />
