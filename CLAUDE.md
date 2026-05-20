@@ -172,13 +172,33 @@ Gold border, gold text, transparent fill.
 
 ## The "Receipt" — your hero visual
 
-The app's settlement receipt (Sunday Sesh share card) is the strongest visual asset in the product. The website's hero should feature it prominently.
+The app's settlement receipt (Sunday Sesh share card) is the strongest visual asset in the product. The website's hero features it prominently.
 
-When building the hero, do not generate a fake mockup. Use an actual screenshot of the receipt as a static image, placed:
-- Centered on desktop, below the headline, with felt-green gradient behind it
-- Straight-on, 0° rotation (no tilts)
-- No glow, no halo
-- Sized so the receipt is the focal point but the headline above it is still primary
+Use the actual share image (`/public/screenshots/receipt-share.png`, sourced from `IMG_7323.png`) as a flat static image — **no felt-green panel behind it, no phone frame around it**. The receipt has its own felt-green header built in, which is the gold/felt presence the hero needs. Wrapping it in another felt panel was visual double-dipping.
+
+Treatment:
+- Centered on desktop, below the headline + CTA stack
+- Straight-on, 0° rotation
+- No glow, no halo, no shadow
+- `rounded-[28px]` corner softening; width `300px` mobile / `420px` desktop
+
+## App screenshots
+
+Live images are stored in `/public/screenshots/`. Source files come from `Straddled 6.7/` (iPhone 15 Pro Max simulator captures).
+
+**Mandatory cleanup before use:** crop the top 170px of each iPhone screenshot to remove the system status bar and Dynamic Island pill — leaving them in makes the marketing site look tacky. Use `sharp` (installed via `node_modules`) to crop programmatically.
+
+Current screens in use on the homepage:
+- `receipt-share.png` — flat receipt, hero
+- `live-session.png` — Live session card in "Built for the table"
+- `settlement.png` — Settlement card in "Built for the table"
+- `home.png` — Home tab card in "Know your numbers"
+- `stats.png` — Stats tab card in "Know your numbers"
+- `receipt-raw.png` — receipt detail in "Receipts that get opened"
+
+## App logo
+
+The official app logo lives at `/public/brand/logo.png` (and `.svg`). It's a dark rounded-square chip mark with the `S` monogram, hand-finished — not the procedurally-drawn SVG that was in `BrandMark.tsx` originally. Use this PNG in `<BrandMark />` wherever it appears (header, footer, /join card).
 
 ## Phone mockups
 
@@ -189,10 +209,18 @@ When building the hero, do not generate a fake mockup. Use an actual screenshot 
 
 ## Iconography
 
-Match the app:
-- Use Lucide icons at `stroke-width={1.5}`
-- Icon color: gold (`#D4B370`) for active/branded, white/60 for neutral
-- Award icons are illustrated emoji-style in the app (shark, money, diamond, etc.). For the web, either use the same illustrated style or simple Lucide outline icons — don't mix the two on the same page.
+`lucide-react` is the icon library. Use stroke-width `1.5`. Color the stroke with the award's accent color (no fills). Place icons in a small tinted-square tile (44×44, `rounded-[12px]`) using a 12% opacity wash of the accent color as the tile background. This matches the app's icon tiles without requiring the same illustrated-emoji set.
+
+**Award icon map** (used in homepage Awards section and any session detail page):
+- **The Shark** — no Lucide match for a fin; use the app's illustrated mark when shown standalone. (Currently The Shark is rendered with the Fraunces wordmark inside its felt-green headline card, not with an icon.)
+- **The ATM** — `Banknote`, loss-red
+- **The Rock** — `Gem`, white/muted
+- **The Swing** — `TrendingUp`, win-green
+- **The Whale** — `Coins`, white/muted
+- **The Iceman** — `Snowflake`, iceman-cyan
+- **The Grinder** — `Pickaxe`, gold
+
+Don't mix Lucide outline icons with the app's illustrated emoji-style award icons on the same page. Pick one set per surface.
 
 ## Voice and copy
 
