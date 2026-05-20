@@ -27,6 +27,7 @@ const config: Config = {
         gold: {
           DEFAULT: "#C9A866",
           light: "#E8C987",
+          bright: "#F5D462",
           muted: "rgba(201,168,102,0.22)",
           deep: "#8A7340",
         },

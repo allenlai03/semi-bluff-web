@@ -3,75 +3,46 @@ import { BrandMark } from "./BrandMark";
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-border bg-bg-primary">
-      <div className="mx-auto max-w-6xl px-md py-xxl md:px-lg">
-        <div className="grid gap-xl md:grid-cols-3">
-          <div>
-            <Link href="/" className="inline-flex items-center gap-sm">
-              <BrandMark size={32} />
-              <span className="font-display text-[22px] font-semibold text-text-primary">
-                Straddled
-              </span>
-            </Link>
-            <p className="mt-sm max-w-[260px] text-[13px] leading-[20px] text-text-secondary">
-              The poker session tracker for friend groups. Settle the night.
-              Share the receipt.
-            </p>
-          </div>
+    <footer className="border-t border-divider bg-bg-primary">
+      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-md px-md py-lg md:flex-row md:items-center md:px-xl md:py-xl">
+        <Link href="/" className="flex items-center gap-sm">
+          <BrandMark size={22} />
+          <span className="text-[15px] font-bold tracking-tight text-text-primary">
+            Straddled
+          </span>
+        </Link>
 
-          <nav className="flex flex-col gap-xs">
-            <span className="eyebrow mb-xs">Site</span>
-            <Link
-              href="/"
-              className="text-[14px] text-text-secondary transition hover:text-gold"
-            >
-              Home
-            </Link>
-            <Link
-              href="/support"
-              className="text-[14px] text-text-secondary transition hover:text-gold"
-            >
-              Support
-            </Link>
-            <Link
-              href="/privacy"
-              className="text-[14px] text-text-secondary transition hover:text-gold"
-            >
-              Privacy
-            </Link>
-          </nav>
-
-          <nav className="flex flex-col gap-xs">
-            <span className="eyebrow mb-xs">Contact</span>
-            <a
-              href="mailto:hello@straddled.app"
-              className="text-[14px] text-text-secondary transition hover:text-gold"
-            >
-              hello@straddled.app
-            </a>
-            <a
-              href="https://x.com/straddledapp"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[14px] text-text-secondary transition hover:text-gold"
-            >
-              X / Twitter
-            </a>
-            <a
-              href="https://instagram.com/straddledapp"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[14px] text-text-secondary transition hover:text-gold"
-            >
-              Instagram
-            </a>
-          </nav>
-        </div>
-
-        <div className="mt-xxl flex flex-col justify-between gap-sm border-t border-divider pt-md text-[10px] uppercase tracking-caps text-text-tertiary md:flex-row">
-          <span>© 2026 Straddled</span>
-          <span>Made for home games. Not for casinos.</span>
-        </div>
+        <nav className="flex flex-wrap items-center gap-md text-[13px] text-text-tertiary md:gap-lg">
+          <a
+            href="mailto:hello@straddled.app"
+            className="transition hover:text-text-primary"
+          >
+            Contact
+          </a>
+          <Link href="/support" className="transition hover:text-text-primary">
+            Support
+          </Link>
+          <Link href="/privacy" className="transition hover:text-text-primary">
+            Privacy
+          </Link>
+          <a
+            href="https://x.com/straddledapp"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition hover:text-text-primary"
+          >
+            X
+          </a>
+          <a
+            href="https://instagram.com/straddledapp"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition hover:text-text-primary"
+          >
+            Instagram
+          </a>
+          <span className="text-text-tertiary/70">© 2026 Straddled</span>
+        </nav>
       </div>
     </footer>
   );
