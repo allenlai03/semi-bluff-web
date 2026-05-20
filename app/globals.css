@@ -78,3 +78,48 @@ body {
   text-transform: uppercase;
   color: var(--gold);
 }
+
+/* Page-load staggered appear — offsuit-style */
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.appear {
+  opacity: 0;
+  animation: appear 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Gold selection */
+::selection {
+  background: var(--gold);
+  color: var(--text-inverse);
+}
+
+/* Smooth scroll for in-page anchors */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Link focus ring — subtle gold, accessible */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Dropdown caret animation for FAQ details */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
