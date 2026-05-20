@@ -25,6 +25,9 @@ export const Footer = () => {
           <Link href="/privacy" className="transition-colors hover:text-white">
             Privacy
           </Link>
+          <Link href="/terms" className="transition-colors hover:text-white">
+            Terms
+          </Link>
           <a
             href="https://x.com/straddledapp"
             target="_blank"

@@ -5,6 +5,7 @@ import type { ComponentType } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AppStoreBadge, AndroidComingSoon } from "@/components/AppStoreBadge";
+// AppStoreBadge + AndroidComingSoon remain in use on the closer; not in the hero.
 
 export const metadata: Metadata = {
   title: "Straddled — Poker night, itemized.",
@@ -68,15 +69,6 @@ export default function Home() {
               <span className="block">Settle the night.</span>
               <span className="block">Share the receipt.</span>
             </h1>
-            <p className="mt-8 max-w-[560px] text-[16px] leading-[1.6] text-white/60 md:text-[17px]">
-              The poker session tracker your group chat has been faking with
-              Notes and a calculator. Track every buy-in. Name the Shark.
-              Drop a receipt the chat will actually open.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center gap-5">
-              <AppStoreBadge size="lg" label="Get the app" />
-              <AndroidComingSoon />
-            </div>
 
             {/* The receipt, as a flat image — its own felt-green header is the only "panel." */}
             <div className="mt-20 flex justify-center md:mt-28">
@@ -195,15 +187,14 @@ export default function Home() {
               <div className="relative z-10">
                 <p className="eyebrow text-white/80">Headline award</p>
                 <h3
-                  className="font-display mt-6 text-white"
+                  className="mt-6 font-semibold tracking-tight"
                   style={{
-                    fontSize: "clamp(3rem, 8vw, 6rem)",
-                    fontWeight: 500,
-                    lineHeight: 0.95,
-                    letterSpacing: "-0.02em",
+                    fontSize: "clamp(2rem, 5vw, 3.5rem)",
+                    lineHeight: 1.05,
+                    color: "#4ADE80",
                   }}
                 >
-                  The Shark.
+                  The Shark
                 </h3>
                 <p className="mt-6 max-w-[440px] text-[15px] leading-[1.6] text-white/70 md:text-[16px]">
                   Biggest net winner of the night. They didn&apos;t just take
