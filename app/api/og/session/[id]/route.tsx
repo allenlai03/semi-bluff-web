@@ -69,7 +69,7 @@ export async function GET(
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          backgroundColor: "#0A0E0B",
+          backgroundColor: "#000000",
           fontFamily: "sans-serif",
         }}
       >
@@ -77,7 +77,7 @@ export async function GET(
         <div
           style={{
             background:
-              "linear-gradient(135deg, #126B4E 0%, #0B4D37 55%, #063324 100%)",
+              "radial-gradient(ellipse at top, #1A6B52 0%, #0F5340 40%, #0A3D2E 100%)",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -89,7 +89,7 @@ export async function GET(
             style={{
               fontSize: "13px",
               letterSpacing: "3px",
-              color: "#C9A866",
+              color: "#D4B370",
               marginBottom: "10px",
               textTransform: "uppercase",
             }}
@@ -100,7 +100,7 @@ export async function GET(
             style={{
               fontSize: "40px",
               fontWeight: 700,
-              color: "#F5EFE2",
+              color: "#FAFAF7",
               marginBottom: "8px",
               fontFamily: "serif",
             }}
@@ -110,7 +110,7 @@ export async function GET(
           <div
             style={{
               fontSize: "14px",
-              color: "rgba(245,239,226,0.72)",
+              color: "rgba(255,255,255,0.7)",
               marginBottom: "14px",
             }}
           >
@@ -121,13 +121,13 @@ export async function GET(
               display: "flex",
               alignItems: "center",
               gap: "8px",
-              backgroundColor: "rgba(10,14,11,0.4)",
-              border: "1px solid rgba(201,168,102,0.22)",
+              backgroundColor: "rgba(0,0,0,0.4)",
+              border: "1px solid rgba(212,179,112,0.4)",
               borderRadius: "999px",
               padding: "6px 18px",
               fontSize: "15px",
               fontWeight: 600,
-              color: "#E8C987",
+              color: "#E8C988",
               fontFamily: "serif",
             }}
           >
@@ -163,7 +163,7 @@ export async function GET(
                     justifyContent: "space-between",
                     alignItems: "center",
                     padding: "10px 16px",
-                    borderBottom: "1px solid rgba(201,168,102,0.12)",
+                    borderBottom: "1px solid rgba(212,179,112,0.12)",
                   }}
                 >
                   <div
@@ -175,7 +175,7 @@ export async function GET(
                   >
                     <span
                       style={{
-                        color: "#C9A866",
+                        color: "#D4B370",
                         fontSize: "16px",
                         fontWeight: 700,
                         width: "24px",
@@ -186,7 +186,7 @@ export async function GET(
                     </span>
                     <span
                       style={{
-                        color: "#F5EFE2",
+                        color: "#FAFAF7",
                         fontSize: "18px",
                         fontWeight: 600,
                       }}
@@ -201,10 +201,10 @@ export async function GET(
                       fontFamily: "serif",
                       color:
                         net > 0
-                          ? "#22C55E"
+                          ? "#4ADE80"
                           : net < 0
-                            ? "#EF4444"
-                            : "rgba(245,239,226,0.5)",
+                            ? "#F87171"
+                            : "rgba(255,255,255,0.4)",
                     }}
                   >
                     {net > 0 ? "+" : ""}
@@ -232,7 +232,7 @@ export async function GET(
                     display: "flex",
                     flexDirection: "column",
                     padding: "8px 12px",
-                    borderLeft: "2px solid #C9A866",
+                    borderLeft: "2px solid #D4B370",
                   }}
                 >
                   <div
@@ -248,7 +248,7 @@ export async function GET(
                       style={{
                         fontSize: "13px",
                         fontWeight: 700,
-                        color: "#E8C987",
+                        color: "#E8C988",
                         textTransform: "uppercase",
                         letterSpacing: "1px",
                       }}
@@ -259,7 +259,7 @@ export async function GET(
                   <span
                     style={{
                       fontSize: "13px",
-                      color: "rgba(245,239,226,0.72)",
+                      color: "rgba(255,255,255,0.7)",
                       marginLeft: "28px",
                     }}
                   >
@@ -280,8 +280,8 @@ export async function GET(
             fontSize: "13px",
             letterSpacing: "2px",
             textTransform: "uppercase",
-            color: "rgba(245,239,226,0.5)",
-            borderTop: "1px solid rgba(201,168,102,0.22)",
+            color: "rgba(255,255,255,0.4)",
+            borderTop: "1px solid rgba(212,179,112,0.12)",
           }}
         >
           straddled.app

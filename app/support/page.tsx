@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Card } from "@/components/Card";
 
 export const metadata: Metadata = {
   title: "Support",
@@ -20,7 +19,7 @@ const faqs: FAQItem[] = [
     a: (
       <>
         Inside the app: Profile → Settings → Delete Account. Or email{" "}
-        <a href="mailto:hello@straddled.app" className="text-gold underline">
+        <a href="mailto:hello@straddled.app" className="text-[#D4B370] underline">
           hello@straddled.app
         </a>{" "}
         and we&apos;ll do it within 48 hours.
@@ -36,7 +35,7 @@ const faqs: FAQItem[] = [
     a: (
       <>
         No. See our full{" "}
-        <a href="/privacy" className="text-gold underline">
+        <a href="/privacy" className="text-[#D4B370] underline">
           privacy policy
         </a>{" "}
         for details.
@@ -52,7 +51,7 @@ const faqs: FAQItem[] = [
     a: (
       <>
         Email us at{" "}
-        <a href="mailto:hello@straddled.app" className="text-gold underline">
+        <a href="mailto:hello@straddled.app" className="text-[#D4B370] underline">
           hello@straddled.app
         </a>{" "}
         with the email you signed up with.
@@ -77,51 +76,65 @@ export default function SupportPage() {
   return (
     <>
       <Header />
-      <main className="bg-bg-primary pt-xxxl">
-        <section className="px-md py-mega md:px-lg">
+      <main className="bg-black pt-32 md:pt-44">
+        <section className="px-6 py-20 md:px-10 md:py-32">
           <div className="mx-auto max-w-3xl">
-            <h1 className="font-display text-[44px] font-bold leading-[1.05] text-text-primary md:text-[56px]">
-              Support
+            <p className="eyebrow">Support</p>
+            <h1
+              className="font-display mt-6 text-white"
+              style={{
+                fontSize: "clamp(2.5rem, 7vw, 5rem)",
+                fontWeight: 500,
+                lineHeight: 1,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              We&apos;ll get back to you.
             </h1>
-            <p className="mt-md max-w-[560px] text-[16px] leading-[26px] text-text-secondary">
+            <p className="mt-6 max-w-[560px] text-[16px] leading-[1.6] text-white/60">
               We&apos;re a tiny team. Email us and you&apos;ll get a real
               reply, usually within a day.
             </p>
 
-            <Card className="mt-xxl p-xl text-center md:p-xxl">
-              <span className="eyebrow">Contact</span>
+            <div className="mt-14 rounded-3xl border border-[#D4B370]/[0.12] bg-[#0E0E0E] p-10 text-center md:p-14">
+              <p className="eyebrow">Contact</p>
               <a
                 href="mailto:hello@straddled.app"
-                className="mt-md block font-display text-[28px] font-semibold text-gold transition hover:text-gold-light md:text-[36px]"
+                className="font-display mt-6 block text-[#D4B370] transition-colors hover:text-[#E8C988]"
+                style={{
+                  fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
+                  fontWeight: 500,
+                  letterSpacing: "-0.01em",
+                }}
               >
                 hello@straddled.app
               </a>
-              <p className="mx-auto mt-md max-w-[420px] text-[14px] leading-[22px] text-text-secondary">
+              <p className="mx-auto mt-5 max-w-[440px] text-[14px] leading-[1.6] text-white/55">
                 Best for anything urgent or account-related. Replies usually
                 within a few hours.
               </p>
-            </Card>
+            </div>
 
-            <div className="mt-xxxl">
-              <span className="eyebrow">Frequently asked</span>
-              <div className="mt-md space-y-md">
+            <div className="mt-24">
+              <p className="eyebrow">Frequently asked</p>
+              <div className="mt-6 space-y-3">
                 {faqs.map((item) => (
                   <details
                     key={item.q}
-                    className="group rounded-lg border border-border bg-surface-primary p-lg transition open:border-gold-muted"
+                    className="group rounded-2xl border border-[#D4B370]/[0.12] bg-[#0E0E0E] p-6 transition-colors open:border-[#D4B370]/[0.22]"
                   >
-                    <summary className="cursor-pointer list-none font-display text-[18px] font-semibold text-text-primary marker:hidden">
-                      <span className="flex items-center justify-between gap-md">
+                    <summary className="cursor-pointer list-none text-[17px] font-medium text-white marker:hidden">
+                      <span className="flex items-center justify-between gap-6">
                         {item.q}
                         <span
-                          className="text-gold transition group-open:rotate-45"
+                          className="text-[#D4B370] transition-transform group-open:rotate-45"
                           aria-hidden="true"
                         >
                           +
                         </span>
                       </span>
                     </summary>
-                    <div className="mt-sm text-[15px] leading-[24px] text-text-secondary">
+                    <div className="mt-3 text-[15px] leading-[1.6] text-white/60">
                       {item.a}
                     </div>
                   </details>

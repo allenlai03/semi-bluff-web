@@ -3,10 +3,6 @@ type BrandMarkProps = {
   className?: string;
 };
 
-/**
- * Straddled brand mark — a dark rounded square with a gold dashed chip ring
- * and a gold "S" centered. Matches the mobile app's BrandMark component.
- */
 export const BrandMark = ({ size = 32, className = "" }: BrandMarkProps) => {
   return (
     <svg
@@ -18,20 +14,20 @@ export const BrandMark = ({ size = 32, className = "" }: BrandMarkProps) => {
       className={className}
       aria-label="Straddled"
     >
-      <rect width="64" height="64" rx="14" fill="#0A0E0B" />
+      <rect width="64" height="64" rx="14" fill="#0E0E0E" />
       <rect
-        x="1"
-        y="1"
-        width="62"
-        height="62"
-        rx="13"
-        stroke="rgba(201,168,102,0.22)"
+        x="0.5"
+        y="0.5"
+        width="63"
+        height="63"
+        rx="13.5"
+        stroke="rgba(212,179,112,0.18)"
       />
       <circle
         cx="32"
         cy="32"
         r="20"
-        stroke="#C9A866"
+        stroke="#D4B370"
         strokeWidth="2"
         strokeDasharray="3 4"
         fill="none"
@@ -42,8 +38,8 @@ export const BrandMark = ({ size = 32, className = "" }: BrandMarkProps) => {
         textAnchor="middle"
         fontFamily="ui-serif, Georgia, serif"
         fontSize="24"
-        fontWeight="700"
-        fill="#C9A866"
+        fontWeight="600"
+        fill="#D4B370"
       >
         S
       </text>

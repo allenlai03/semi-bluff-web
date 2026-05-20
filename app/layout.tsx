@@ -1,12 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 
-const jakarta = Plus_Jakarta_Sans({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  style: ["normal"],
   display: "swap",
-  variable: "--font-display",
+  axes: ["opsz", "SOFT", "WONK"],
+  variable: "--font-display-var",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+  variable: "--font-sans-var",
 });
 
 export const metadata: Metadata = {
@@ -36,7 +44,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0A0E0B",
+  themeColor: "#000000",
 };
 
 export default function RootLayout({
@@ -45,8 +53,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={jakarta.variable}>
-      <body className="min-h-screen bg-bg-primary font-display text-text-primary antialiased">
+    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+      <body className="min-h-screen bg-black font-sans text-fg antialiased">
         {children}
       </body>
     </html>

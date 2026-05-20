@@ -9,7 +9,6 @@ import {
 } from "@/lib/queries";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Card } from "@/components/Card";
 import { AppStoreBadge } from "@/components/AppStoreBadge";
 import { formatDate, formatCurrency } from "@/utils/format";
 
@@ -49,54 +48,67 @@ export default async function GroupPage({ params }: Props) {
   return (
     <>
       <Header />
-      <main className="bg-bg-primary pt-xxxl">
-        <div className="mx-auto max-w-3xl px-md py-xl md:px-lg">
-          {/* Group Header — felt accent */}
-          <Card className="overflow-hidden">
-            <div className="bg-felt px-lg py-xl text-center">
-              <span className="eyebrow">Group</span>
-              <h1 className="mt-sm font-display text-[32px] font-bold leading-[1.05] text-text-primary md:text-[44px]">
+      <main className="bg-black pt-32 md:pt-40">
+        <div className="mx-auto max-w-3xl px-6 py-12 md:px-10">
+          {/* Group header — felt panel */}
+          <div
+            className="grain relative overflow-hidden rounded-3xl px-8 py-12 text-center md:px-12 md:py-16"
+            style={{
+              background:
+                "radial-gradient(ellipse at top, #1A6B52 0%, #0F5340 40%, #0A3D2E 100%)",
+            }}
+          >
+            <div className="relative z-10">
+              <p className="eyebrow text-white/80">Group</p>
+              <h1
+                className="font-display mt-5 text-white"
+                style={{
+                  fontSize: "clamp(2rem, 6vw, 3.5rem)",
+                  fontWeight: 500,
+                  lineHeight: 1.05,
+                  letterSpacing: "-0.015em",
+                }}
+              >
                 {group.name}
               </h1>
-              <p className="mt-sm text-[13px] text-text-secondary">
+              <p className="mt-3 text-[13px] text-white/70">
                 {memberCount} member{memberCount !== 1 ? "s" : ""} ·{" "}
                 {recentSessions.length} recent session
                 {recentSessions.length !== 1 ? "s" : ""}
               </p>
             </div>
-          </Card>
+          </div>
 
-          {/* Leaderboard */}
           {leaderboard.length > 0 && (
-            <section className="mt-xxl">
-              <span className="eyebrow">All-Time Leaderboard</span>
-              <div className="mt-md space-y-xs">
+            <section className="mt-16">
+              <p className="eyebrow">All-time leaderboard</p>
+              <div className="mt-5 space-y-2">
                 {leaderboard.slice(0, 10).map((entry, i) => (
                   <div
                     key={entry.userId}
-                    className="flex items-center justify-between rounded-lg border border-divider bg-surface-primary px-md py-sm"
+                    className="flex items-center justify-between rounded-2xl border border-[#D4B370]/[0.12] bg-[#0E0E0E] px-5 py-4"
                   >
-                    <div className="flex items-center gap-md">
-                      <span className="nums w-6 text-center text-[12px] uppercase tracking-caps text-text-tertiary">
+                    <div className="flex items-center gap-5">
+                      <span className="nums w-6 text-center text-[12px] uppercase tracking-[0.18em] text-white/40">
                         {i + 1}
                       </span>
                       <div>
-                        <p className="text-[15px] font-medium text-text-primary">
+                        <p className="text-[15px] font-medium text-white">
                           {entry.displayName}
                         </p>
-                        <p className="text-[12px] text-text-tertiary">
+                        <p className="text-[12px] text-white/40">
                           {entry.sessionCount} session
                           {entry.sessionCount !== 1 ? "s" : ""}
                         </p>
                       </div>
                     </div>
                     <span
-                      className={`nums font-display text-[18px] font-semibold ${
+                      className={`nums text-[17px] font-semibold ${
                         entry.totalNet > 0
-                          ? "text-positive"
+                          ? "text-[#4ADE80]"
                           : entry.totalNet < 0
-                            ? "text-negative"
-                            : "text-text-tertiary"
+                            ? "text-[#F87171]"
+                            : "text-white/40"
                       }`}
                     >
                       {entry.totalNet > 0 ? "+" : ""}
@@ -108,22 +120,21 @@ export default async function GroupPage({ params }: Props) {
             </section>
           )}
 
-          {/* Recent Sessions */}
           {recentSessions.length > 0 && (
-            <section className="mt-xxl">
-              <span className="eyebrow">Recent Sessions</span>
-              <div className="mt-md space-y-xs">
+            <section className="mt-16">
+              <p className="eyebrow">Recent sessions</p>
+              <div className="mt-5 space-y-2">
                 {recentSessions.map((session) => (
                   <Link
                     key={session.id}
                     href={`/s/${session.id}`}
-                    className="flex items-center justify-between rounded-lg border border-divider bg-surface-primary px-md py-sm transition hover:border-gold-muted hover:bg-surface-secondary"
+                    className="flex items-center justify-between rounded-2xl border border-[#D4B370]/[0.12] bg-[#0E0E0E] px-5 py-4 transition-colors hover:border-[#D4B370]/[0.25]"
                   >
                     <div>
-                      <p className="text-[15px] font-medium text-text-primary">
+                      <p className="text-[15px] font-medium text-white">
                         {session.name}
                       </p>
-                      <p className="text-[12px] text-text-tertiary">
+                      <p className="text-[12px] text-white/40">
                         {formatDate(
                           session.closed_at ?? session.started_at ?? ""
                         )}{" "}
@@ -132,10 +143,10 @@ export default async function GroupPage({ params }: Props) {
                     </div>
                     {session.biggestWinner && (
                       <div className="text-right">
-                        <p className="text-[11px] uppercase tracking-caps text-text-tertiary">
+                        <p className="text-[10px] uppercase tracking-[0.18em] text-white/40">
                           {session.biggestWinner.name}
                         </p>
-                        <p className="nums text-[14px] font-semibold text-positive">
+                        <p className="nums text-[14px] font-semibold text-[#4ADE80]">
                           +{formatCurrency(session.biggestWinner.net)}
                         </p>
                       </div>
@@ -146,18 +157,24 @@ export default async function GroupPage({ params }: Props) {
             </section>
           )}
 
-          {/* Install CTA */}
-          <Card className="mt-xxxl p-xl text-center">
-            <h3 className="font-display text-[24px] font-semibold text-text-primary">
+          <div className="mt-20 rounded-3xl border border-[#D4B370]/[0.12] bg-[#0E0E0E] p-10 text-center md:p-14">
+            <h3
+              className="font-display text-white"
+              style={{
+                fontSize: "clamp(1.5rem, 3.5vw, 2.25rem)",
+                fontWeight: 500,
+                letterSpacing: "-0.015em",
+              }}
+            >
               Want in?
             </h3>
-            <p className="mx-auto mt-sm max-w-[420px] text-[14px] text-text-secondary">
+            <p className="mx-auto mt-4 max-w-[420px] text-[14px] leading-[1.6] text-white/60">
               Get Straddled to join {group.name} or start your own home game.
             </p>
-            <div className="mt-lg flex justify-center">
+            <div className="mt-8 flex justify-center">
               <AppStoreBadge size="lg" />
             </div>
-          </Card>
+          </div>
         </div>
       </main>
       <Footer />

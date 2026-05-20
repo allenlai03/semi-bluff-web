@@ -1,123 +1,100 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  /* Backgrounds */
-  --bg-primary: #0A0E0B;
-  --bg-secondary: #0D0F10;
-  --bg-tertiary: #141815;
+@theme {
+  --font-display: var(--font-display-var), ui-serif, Georgia, serif;
+  --font-sans: var(--font-sans-var), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Surfaces */
-  --surface-primary: #101411;
-  --surface-secondary: #161B17;
+  --color-gold: #D4B370;
+  --color-gold-bright: #E8C988;
+  --color-gold-soft: rgba(212, 179, 112, 0.6);
+  --color-gold-hairline: rgba(212, 179, 112, 0.12);
 
-  /* Text */
-  --text-primary: #F5EFE2;
-  --text-secondary: rgba(245, 239, 226, 0.72);
-  --text-tertiary: rgba(245, 239, 226, 0.50);
-  --text-inverse: #0A0E0B;
+  --color-felt-deep: #0A3D2E;
+  --color-felt-mid: #0F5340;
+  --color-felt-glow: #1A6B52;
 
-  /* Gold — the accent (replaces old purple) */
-  --gold: #C9A866;
-  --gold-light: #E8C987;
-  --gold-bright: #F5D462;
-  --gold-muted: rgba(201, 168, 102, 0.22);
-  --gold-deep: #8A7340;
+  --color-win: #4ADE80;
+  --color-loss: #F87171;
+  --color-iceman: #7DD3FC;
 
-  /* Felt gradient stops */
-  --felt-from: #126B4E;
-  --felt-mid: #0B4D37;
-  --felt-to: #063324;
+  --color-fg: #FAFAF7;
 
-  /* Semantic */
-  --positive: #22C55E;
-  --negative: #EF4444;
-  --warning: #F59E0B;
-
-  /* UI */
-  --border: rgba(201, 168, 102, 0.22);
-  --divider: rgba(201, 168, 102, 0.12);
-  --overlay: rgba(0, 0, 0, 0.65);
+  --tracking-eyebrow: 0.18em;
 }
 
 html {
-  background: var(--bg-primary);
+  background: #000;
   color-scheme: dark;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-feature-settings: "ss01", "ss02";
+  background: #000;
+  color: #FAFAF7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Tabular nums helper */
 .nums {
   font-variant-numeric: tabular-nums;
 }
 
-/* Felt-section noise overlay — call via class */
-.felt-noise {
-  position: relative;
+.font-display {
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
 }
-.felt-noise::after {
+
+.eyebrow {
+  font-family: var(--font-sans-var), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(212, 179, 112, 0.9);
+}
+
+/* Casino-felt grain overlay — apply to any felt-green panel. */
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+.grain::after {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   pointer-events: none;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.79  0 0 0 0 0.66  0 0 0 0 0.40  0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.08;
   mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 240px 240px;
 }
 
-/* Eyebrow label utility */
-.eyebrow {
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold);
+/* Decorative numeral — oversized Fraunces digit anchor for cards. */
+.numeral {
+  font-family: var(--font-display-var), ui-serif, Georgia, serif;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  font-weight: 400;
+  font-feature-settings: "lnum";
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: rgba(212, 179, 112, 0.22);
+  user-select: none;
 }
 
-/* Page-load staggered appear — offsuit-style */
-@keyframes appear {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.appear {
-  opacity: 0;
-  animation: appear 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-/* Gold selection */
 ::selection {
-  background: var(--gold);
-  color: var(--text-inverse);
+  background: #D4B370;
+  color: #000;
 }
 
-/* Smooth scroll for in-page anchors */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Link focus ring — subtle gold, accessible */
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 1px solid #D4B370;
   outline-offset: 3px;
   border-radius: 4px;
 }
 
-/* Dropdown caret animation for FAQ details */
 details > summary {
   list-style: none;
 }

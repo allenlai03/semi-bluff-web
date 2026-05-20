@@ -6,7 +6,6 @@ import {
 } from "@/lib/queries";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Card } from "@/components/Card";
 import { AppStoreBadge } from "@/components/AppStoreBadge";
 import { BrandMark } from "@/components/BrandMark";
 
@@ -37,21 +36,29 @@ export default async function InvitePage({ params }: Props) {
     return (
       <>
         <Header />
-        <main className="flex min-h-screen flex-col items-center justify-center bg-bg-primary px-md pt-xxxl text-center">
-          <span className="eyebrow">Invalid Invite</span>
-          <h1 className="mt-md font-display text-[40px] font-bold leading-[1.05] text-text-primary">
+        <main className="flex min-h-screen flex-col items-center justify-center bg-black px-6 pt-32 text-center md:px-10">
+          <span className="eyebrow">Invalid invite</span>
+          <h1
+            className="font-display mt-6 text-white"
+            style={{
+              fontSize: "clamp(2.25rem, 6vw, 4rem)",
+              fontWeight: 500,
+              lineHeight: 1,
+              letterSpacing: "-0.02em",
+            }}
+          >
             Invite expired.
           </h1>
-          <p className="mt-md max-w-[420px] text-[15px] leading-[24px] text-text-secondary">
+          <p className="mt-6 max-w-[440px] text-[15px] leading-[1.6] text-white/60">
             This invite link is invalid or has expired. Ask whoever sent it to
             generate a new one from inside the app.
           </p>
-          <div className="mt-xl">
-            <AppStoreBadge />
+          <div className="mt-10">
+            <AppStoreBadge size="lg" />
           </div>
           <Link
             href="/"
-            className="mt-md text-[12px] uppercase tracking-caps text-text-tertiary transition hover:text-gold"
+            className="mt-6 text-[11px] uppercase tracking-[0.18em] text-white/40 transition-colors hover:text-[#D4B370]"
           >
             ← Straddled home
           </Link>
@@ -66,39 +73,47 @@ export default async function InvitePage({ params }: Props) {
   return (
     <>
       <Header />
-      <main className="flex min-h-screen flex-col items-center justify-center bg-bg-primary px-md pt-xxxl">
-        <Card className="w-full max-w-[480px] p-xl text-center md:p-xxl">
+      <main className="flex min-h-screen flex-col items-center justify-center bg-black px-6 pt-32 md:px-10">
+        <div className="w-full max-w-[480px] rounded-3xl border border-[#D4B370]/[0.12] bg-[#0E0E0E] p-10 text-center md:p-12">
           <div className="mx-auto inline-flex">
             <BrandMark size={56} />
           </div>
-          <span className="mt-lg block text-[11px] uppercase tracking-caps text-text-tertiary">
+          <p className="mt-8 text-[11px] uppercase tracking-[0.18em] text-white/40">
             You&apos;ve been invited to
-          </span>
-          <h1 className="mt-xs font-display text-[32px] font-semibold leading-[1.1] text-text-primary">
+          </p>
+          <h1
+            className="font-display mt-3 text-white"
+            style={{
+              fontSize: "clamp(1.75rem, 5vw, 2.5rem)",
+              fontWeight: 500,
+              lineHeight: 1.05,
+              letterSpacing: "-0.015em",
+            }}
+          >
             {group.name}
           </h1>
-          <p className="mt-sm text-[13px] text-text-secondary">
+          <p className="mt-3 text-[13px] text-white/55">
             {memberCount} member{memberCount !== 1 ? "s" : ""}
           </p>
 
-          <div className="mt-xl flex flex-col gap-sm">
+          <div className="mt-8 flex flex-col gap-3">
             <a
               href={`straddled://join/${code}`}
-              className="rounded-xl bg-gold px-lg py-md font-display text-[16px] font-semibold text-text-inverse transition hover:bg-gold-light"
+              className="rounded-full bg-[#D4B370] px-7 py-3.5 text-[15px] font-semibold text-black transition-colors hover:bg-[#E8C988]"
             >
               Open in Straddled
             </a>
-            <AppStoreBadge />
+            <AppStoreBadge variant="secondary" />
           </div>
 
-          <p className="mt-lg text-[12px] uppercase tracking-caps text-text-tertiary">
+          <p className="mt-8 text-[11px] uppercase tracking-[0.18em] text-white/40">
             New here? Install Straddled — your invite stays valid.
           </p>
-        </Card>
+        </div>
 
         <Link
           href="/"
-          className="mt-lg text-[12px] uppercase tracking-caps text-text-tertiary transition hover:text-gold"
+          className="mt-8 text-[11px] uppercase tracking-[0.18em] text-white/40 transition-colors hover:text-[#D4B370]"
         >
           What is Straddled? →
         </Link>

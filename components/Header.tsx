@@ -17,20 +17,20 @@ export const Header = () => {
 
   return (
     <header
-      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed left-0 right-0 top-0 z-50 transition-colors duration-300 ${
         scrolled
-          ? "border-b border-border bg-bg-primary/85 backdrop-blur-xl"
+          ? "border-b border-[#D4B370]/[0.08] bg-black/80 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-md md:h-20 md:px-xl">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 md:h-20 md:px-10">
         <Link
           href="/"
-          className="flex items-center gap-sm"
+          className="flex items-center gap-2.5"
           aria-label="Straddled home"
         >
           <BrandMark size={28} />
-          <span className="text-[17px] font-bold tracking-tight text-text-primary">
+          <span className="text-[16px] font-semibold tracking-tight text-white">
             Straddled
           </span>
         </Link>
