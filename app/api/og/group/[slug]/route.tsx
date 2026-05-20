@@ -24,14 +24,6 @@ export async function GET(
   ]);
 
   const top5 = leaderboard.slice(0, 5);
-  const sessionCount = leaderboard.reduce(
-    (max, e) => max + e.sessionCount,
-    0
-  );
-  // Deduplicate: total unique sessions is harder to get, use a rough count
-  const totalSessions = Math.round(sessionCount / Math.max(leaderboard.length, 1));
-
-  const medalEmojis: Record<number, string> = { 0: "🥇", 1: "🥈", 2: "🥉" };
 
   return new ImageResponse(
     (
@@ -41,14 +33,15 @@ export async function GET(
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          backgroundColor: "#0D0D0D",
+          backgroundColor: "#0A0E0B",
           fontFamily: "sans-serif",
         }}
       >
-        {/* Purple Header */}
+        {/* Felt Header */}
         <div
           style={{
-            backgroundColor: "#7C3AED",
+            background:
+              "linear-gradient(135deg, #126B4E 0%, #0B4D37 55%, #063324 100%)",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -59,20 +52,21 @@ export async function GET(
           <div
             style={{
               fontSize: "13px",
-              letterSpacing: "2px",
-              color: "rgba(255,255,255,0.7)",
-              marginBottom: "8px",
+              letterSpacing: "3px",
+              color: "#C9A866",
+              marginBottom: "12px",
               textTransform: "uppercase",
             }}
           >
-            Semi Bluff
+            Straddled
           </div>
           <div
             style={{
-              fontSize: "36px",
-              fontWeight: 800,
-              color: "#FFFFFF",
-              marginBottom: "6px",
+              fontSize: "44px",
+              fontWeight: 700,
+              color: "#F5EFE2",
+              marginBottom: "8px",
+              fontFamily: "serif",
             }}
           >
             {group.name}
@@ -80,20 +74,21 @@ export async function GET(
           <div
             style={{
               fontSize: "16px",
-              color: "rgba(255,255,255,0.7)",
+              color: "rgba(245,239,226,0.72)",
             }}
           >
-            {memberCount} member{memberCount !== 1 ? "s" : ""}
+            {memberCount} member{memberCount !== 1 ? "s" : ""} ·{" "}
+            {leaderboard.length} on the leaderboard
           </div>
         </div>
 
-        {/* Leaderboard Body */}
+        {/* Leaderboard */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             flex: 1,
-            padding: "24px 60px",
+            padding: "28px 80px",
             gap: "4px",
           }}
         >
@@ -104,19 +99,28 @@ export async function GET(
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                padding: "12px 20px",
+                padding: "14px 20px",
+                borderBottom: "1px solid rgba(201,168,102,0.12)",
               }}
             >
               <div
-                style={{ display: "flex", alignItems: "center", gap: "16px" }}
+                style={{ display: "flex", alignItems: "center", gap: "20px" }}
               >
-                <span style={{ fontSize: "20px", width: "32px" }}>
-                  {medalEmojis[i] ?? `${i + 1}`}
+                <span
+                  style={{
+                    color: "#C9A866",
+                    fontSize: "18px",
+                    fontWeight: 700,
+                    width: "32px",
+                    fontFamily: "serif",
+                  }}
+                >
+                  {i + 1}
                 </span>
                 <span
                   style={{
-                    color: "#FFFFFF",
-                    fontSize: "20px",
+                    color: "#F5EFE2",
+                    fontSize: "22px",
                     fontWeight: 600,
                   }}
                 >
@@ -125,16 +129,18 @@ export async function GET(
               </div>
               <span
                 style={{
-                  fontSize: "22px",
+                  fontSize: "24px",
                   fontWeight: 700,
+                  fontFamily: "serif",
                   color:
                     entry.totalNet > 0
                       ? "#22C55E"
                       : entry.totalNet < 0
                         ? "#EF4444"
-                        : "rgba(255,255,255,0.4)",
+                        : "rgba(245,239,226,0.5)",
                 }}
               >
+                {entry.totalNet > 0 ? "+" : ""}
                 {formatCurrency(entry.totalNet)}
               </span>
             </div>
@@ -147,11 +153,14 @@ export async function GET(
             display: "flex",
             justifyContent: "center",
             padding: "16px",
-            fontSize: "14px",
-            color: "#666666",
+            fontSize: "13px",
+            letterSpacing: "2px",
+            textTransform: "uppercase",
+            color: "rgba(245,239,226,0.5)",
+            borderTop: "1px solid rgba(201,168,102,0.22)",
           }}
         >
-          semi-bluff.app
+          straddled.app
         </div>
       </div>
     ),

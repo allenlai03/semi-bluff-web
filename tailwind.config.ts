@@ -10,38 +10,39 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          primary: "#0D0D0D",
-          secondary: "#1A1A1A",
-          tertiary: "#242424",
+          primary: "#0A0E0B",
+          secondary: "#0D0F10",
+          tertiary: "#141815",
         },
         surface: {
-          primary: "#1E1E1E",
-          secondary: "#2A2A2A",
-          elevated: "#333333",
+          primary: "#101411",
+          secondary: "#161B17",
         },
         text: {
-          primary: "#FFFFFF",
-          secondary: "#A0A0A0",
-          tertiary: "#666666",
-          inverse: "#0D0D0D",
+          primary: "#F5EFE2",
+          secondary: "rgba(245,239,226,0.72)",
+          tertiary: "rgba(245,239,226,0.50)",
+          inverse: "#0A0E0B",
         },
-        accent: {
-          primary: "#7C3AED",
-          secondary: "#9F67FF",
-          muted: "#3D1F7A",
+        gold: {
+          DEFAULT: "#C9A866",
+          light: "#E8C987",
+          muted: "rgba(201,168,102,0.22)",
+          deep: "#8A7340",
+        },
+        felt: {
+          from: "#126B4E",
+          mid: "#0B4D37",
+          to: "#063324",
         },
         positive: "#22C55E",
         negative: "#EF4444",
         warning: "#F59E0B",
-        border: "#2E2E2E",
-        divider: "#1F1F1F",
-        medal: {
-          gold: "#FFD700",
-          silver: "#C0C0C0",
-          bronze: "#CD7F32",
-        },
+        border: "rgba(201,168,102,0.22)",
+        divider: "rgba(201,168,102,0.12)",
       },
       fontFamily: {
+        display: ["var(--font-display)", "ui-serif", "Georgia", "serif"],
         sans: [
           "-apple-system",
           "BlinkMacSystemFont",
@@ -57,12 +58,25 @@ const config: Config = {
         lg: "24px",
         xl: "32px",
         xxl: "48px",
+        xxxl: "64px",
+        huge: "96px",
+        mega: "128px",
       },
       borderRadius: {
         sm: "6px",
         md: "10px",
-        lg: "12px",
+        lg: "14px",
         xl: "20px",
+      },
+      letterSpacing: {
+        caps: "0.12em",
+      },
+      backgroundImage: {
+        felt: "linear-gradient(135deg, #126B4E 0%, #0B4D37 55%, #063324 100%)",
+      },
+      boxShadow: {
+        felt: "0 30px 80px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,168,102,0.18)",
+        card: "0 12px 40px -16px rgba(0,0,0,0.6)",
       },
     },
   },

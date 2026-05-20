@@ -1,18 +1,42 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Fraunces } from "next/font/google";
 import "./globals.css";
 
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  display: "swap",
+  variable: "--font-display",
+});
+
 export const metadata: Metadata = {
-  title: "Semi Bluff — Poker Night, Settled",
+  metadataBase: new URL("https://www.straddled.app"),
+  title: {
+    template: "%s — Straddled",
+    default: "Straddled — Poker night, itemized.",
+  },
   description:
-    "Track buy-ins, results, and settlements for your home poker game. Leaderboards, stats, and shareable receipts.",
-  metadataBase: new URL("https://semibluff.app"),
+    "The poker session tracker for friend groups. Track buy-ins in real time, settle the math, and share a receipt your group chat will actually open.",
+  appleWebApp: {
+    title: "Straddled",
+  },
   openGraph: {
-    title: "Semi Bluff — Poker Night, Settled",
+    title: "Straddled — Poker night, itemized.",
     description:
-      "Track buy-ins, results, and settlements for your home poker game.",
-    siteName: "Semi Bluff",
+      "Track every buy-in, rebuy, and cash-out in real time. Straddled does the math, names a Shark, and drops a receipt your group chat will actually open.",
+    siteName: "Straddled",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Straddled — Poker night, itemized.",
+    description:
+      "Track buy-ins in real time. Settle the math. Share the receipt.",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0A0E0B",
 };
 
 export default function RootLayout({
@@ -21,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={fraunces.variable}>
       <body className="min-h-screen bg-bg-primary font-sans text-text-primary antialiased">
         {children}
       </body>

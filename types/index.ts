@@ -3,7 +3,15 @@
 export type SessionStatus = "lobby" | "active" | "cashing_out" | "closed";
 export type GroupRole = "admin" | "member";
 export type TransactionStatus = "unpaid" | "paid";
-export type SuperlativeType = "shark" | "atm" | "rock" | "swing";
+export type SuperlativeType =
+  | "shark"
+  | "atm"
+  | "rock"
+  | "swing"
+  | "whale"
+  | "phoenix"
+  | "iceman"
+  | "grinder";
 
 // ─── Database Row Types ─────────────────────────────────
 
@@ -111,4 +119,8 @@ export const SUPERLATIVE_CONFIG: Record<
   atm: { emoji: "🏧", title: "The ATM", color: "#EF4444" },
   rock: { emoji: "🪨", title: "The Rock", color: "#A0A0A0" },
   swing: { emoji: "🎢", title: "The Swing", color: "#F59E0B" },
+  whale: { emoji: "🐋", title: "The Whale", color: "#C9A866" },
+  phoenix: { emoji: "🔥", title: "The Phoenix", color: "#F59E0B" },
+  iceman: { emoji: "❄️", title: "The Iceman", color: "#7DD3FC" },
+  grinder: { emoji: "⏱️", title: "The Grinder", color: "#A0A0A0" },
 };

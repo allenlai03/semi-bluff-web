@@ -4,25 +4,30 @@
 
 :root {
   /* Backgrounds */
-  --bg-primary: #0D0D0D;
-  --bg-secondary: #1A1A1A;
-  --bg-tertiary: #242424;
+  --bg-primary: #0A0E0B;
+  --bg-secondary: #0D0F10;
+  --bg-tertiary: #141815;
 
   /* Surfaces */
-  --surface-primary: #1E1E1E;
-  --surface-secondary: #2A2A2A;
-  --surface-elevated: #333333;
+  --surface-primary: #101411;
+  --surface-secondary: #161B17;
 
   /* Text */
-  --text-primary: #FFFFFF;
-  --text-secondary: #A0A0A0;
-  --text-tertiary: #666666;
-  --text-inverse: #0D0D0D;
+  --text-primary: #F5EFE2;
+  --text-secondary: rgba(245, 239, 226, 0.72);
+  --text-tertiary: rgba(245, 239, 226, 0.50);
+  --text-inverse: #0A0E0B;
 
-  /* Accent */
-  --accent-primary: #7C3AED;
-  --accent-secondary: #9F67FF;
-  --accent-muted: #3D1F7A;
+  /* Gold — the accent (replaces old purple) */
+  --gold: #C9A866;
+  --gold-light: #E8C987;
+  --gold-muted: rgba(201, 168, 102, 0.22);
+  --gold-deep: #8A7340;
+
+  /* Felt gradient stops */
+  --felt-from: #126B4E;
+  --felt-mid: #0B4D37;
+  --felt-to: #063324;
 
   /* Semantic */
   --positive: #22C55E;
@@ -30,18 +35,46 @@
   --warning: #F59E0B;
 
   /* UI */
-  --border: #2E2E2E;
-  --divider: #1F1F1F;
-  --overlay: rgba(0, 0, 0, 0.6);
+  --border: rgba(201, 168, 102, 0.22);
+  --divider: rgba(201, 168, 102, 0.12);
+  --overlay: rgba(0, 0, 0, 0.65);
+}
 
-  /* Medal */
-  --medal-gold: #FFD700;
-  --medal-silver: #C0C0C0;
-  --medal-bronze: #CD7F32;
+html {
+  background: var(--bg-primary);
+  color-scheme: dark;
 }
 
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-feature-settings: "ss01", "ss02";
+}
+
+/* Tabular nums helper */
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Felt-section noise overlay — call via class */
+.felt-noise {
+  position: relative;
+}
+.felt-noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.79  0 0 0 0 0.66  0 0 0 0 0.40  0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode: overlay;
+}
+
+/* Eyebrow label utility */
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
 }

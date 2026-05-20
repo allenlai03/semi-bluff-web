@@ -32,7 +32,6 @@ export async function GET(
   const date = formatDate(session.closed_at ?? session.started_at ?? "");
   const topPlayers = players.slice(0, 5);
 
-  // Order superlatives
   const orderedTypes: SuperlativeType[] = ["shark", "atm", "rock", "swing"];
   const orderedSuperlatives = orderedTypes
     .map((type) => {
@@ -70,38 +69,40 @@ export async function GET(
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          backgroundColor: "#0D0D0D",
+          backgroundColor: "#0A0E0B",
           fontFamily: "sans-serif",
         }}
       >
-        {/* Purple Header */}
+        {/* Felt Header */}
         <div
           style={{
-            backgroundColor: "#7C3AED",
+            background:
+              "linear-gradient(135deg, #126B4E 0%, #0B4D37 55%, #063324 100%)",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            padding: "32px 60px 24px",
+            padding: "36px 60px 28px",
           }}
         >
           <div
             style={{
               fontSize: "13px",
-              letterSpacing: "2px",
-              color: "rgba(255,255,255,0.7)",
-              marginBottom: "8px",
+              letterSpacing: "3px",
+              color: "#C9A866",
+              marginBottom: "10px",
               textTransform: "uppercase",
             }}
           >
-            Semi Bluff
+            Straddled
           </div>
           <div
             style={{
-              fontSize: "32px",
-              fontWeight: 800,
-              color: "#FFFFFF",
-              marginBottom: "6px",
+              fontSize: "40px",
+              fontWeight: 700,
+              color: "#F5EFE2",
+              marginBottom: "8px",
+              fontFamily: "serif",
             }}
           >
             {session.name}
@@ -109,8 +110,8 @@ export async function GET(
           <div
             style={{
               fontSize: "14px",
-              color: "rgba(255,255,255,0.7)",
-              marginBottom: "12px",
+              color: "rgba(245,239,226,0.72)",
+              marginBottom: "14px",
             }}
           >
             {date}
@@ -120,23 +121,26 @@ export async function GET(
               display: "flex",
               alignItems: "center",
               gap: "8px",
-              backgroundColor: "rgba(255,255,255,0.15)",
-              borderRadius: "20px",
-              padding: "6px 16px",
-              fontSize: "14px",
-              color: "#FFFFFF",
+              backgroundColor: "rgba(10,14,11,0.4)",
+              border: "1px solid rgba(201,168,102,0.22)",
+              borderRadius: "999px",
+              padding: "6px 18px",
+              fontSize: "15px",
+              fontWeight: 600,
+              color: "#E8C987",
+              fontFamily: "serif",
             }}
           >
-            💰 ${totalPot.toFixed(2)} pot
+            ${totalPot.toFixed(2)} pot
           </div>
         </div>
 
-        {/* Body: Players + Superlatives side by side */}
+        {/* Body: Players + Superlatives */}
         <div
           style={{
             display: "flex",
             flex: 1,
-            padding: "20px 60px",
+            padding: "24px 60px",
             gap: "40px",
           }}
         >
@@ -159,27 +163,30 @@ export async function GET(
                     justifyContent: "space-between",
                     alignItems: "center",
                     padding: "10px 16px",
+                    borderBottom: "1px solid rgba(201,168,102,0.12)",
                   }}
                 >
                   <div
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "12px",
+                      gap: "14px",
                     }}
                   >
                     <span
                       style={{
-                        color: "#666666",
+                        color: "#C9A866",
                         fontSize: "16px",
+                        fontWeight: 700,
                         width: "24px",
+                        fontFamily: "serif",
                       }}
                     >
                       {i + 1}
                     </span>
                     <span
                       style={{
-                        color: "#FFFFFF",
+                        color: "#F5EFE2",
                         fontSize: "18px",
                         fontWeight: 600,
                       }}
@@ -189,16 +196,18 @@ export async function GET(
                   </div>
                   <span
                     style={{
-                      fontSize: "18px",
+                      fontSize: "20px",
                       fontWeight: 700,
+                      fontFamily: "serif",
                       color:
                         net > 0
                           ? "#22C55E"
                           : net < 0
                             ? "#EF4444"
-                            : "rgba(255,255,255,0.4)",
+                            : "rgba(245,239,226,0.5)",
                     }}
                   >
+                    {net > 0 ? "+" : ""}
                     {formatCurrency(net)}
                   </span>
                 </div>
@@ -213,7 +222,7 @@ export async function GET(
                 display: "flex",
                 flexDirection: "column",
                 width: "320px",
-                gap: "8px",
+                gap: "10px",
               }}
             >
               {orderedSuperlatives.map((sup) => (
@@ -223,6 +232,7 @@ export async function GET(
                     display: "flex",
                     flexDirection: "column",
                     padding: "8px 12px",
+                    borderLeft: "2px solid #C9A866",
                   }}
                 >
                   <div
@@ -238,9 +248,9 @@ export async function GET(
                       style={{
                         fontSize: "13px",
                         fontWeight: 700,
-                        color: "#FFFFFF",
+                        color: "#E8C987",
                         textTransform: "uppercase",
-                        letterSpacing: "0.5px",
+                        letterSpacing: "1px",
                       }}
                     >
                       {sup.title}
@@ -249,7 +259,7 @@ export async function GET(
                   <span
                     style={{
                       fontSize: "13px",
-                      color: "#A0A0A0",
+                      color: "rgba(245,239,226,0.72)",
                       marginLeft: "28px",
                     }}
                   >
@@ -267,11 +277,14 @@ export async function GET(
             display: "flex",
             justifyContent: "center",
             padding: "12px",
-            fontSize: "14px",
-            color: "#666666",
+            fontSize: "13px",
+            letterSpacing: "2px",
+            textTransform: "uppercase",
+            color: "rgba(245,239,226,0.5)",
+            borderTop: "1px solid rgba(201,168,102,0.22)",
           }}
         >
-          semi-bluff.app
+          straddled.app
         </div>
       </div>
     ),

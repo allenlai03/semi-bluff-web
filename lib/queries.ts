@@ -11,6 +11,11 @@ import type {
 } from "@/types";
 import { getPlayerName } from "@/utils/format";
 
+// Hard cap on how many sessions we pull when building the leaderboard.
+// Protects against DoS / unbounded query for popular groups.
+const LEADERBOARD_SESSION_CAP = 500;
+const LEADERBOARD_TOP_N = 25;
+
 // ── Group ──────────────────────────────────────────────
 
 export async function fetchGroupBySlug(slug: string): Promise<Group | null> {
@@ -50,7 +55,9 @@ export async function fetchLeaderboard(
     .from("sessions")
     .select("id")
     .eq("group_id", groupId)
-    .eq("status", "closed");
+    .eq("status", "closed")
+    .order("closed_at", { ascending: false })
+    .limit(LEADERBOARD_SESSION_CAP);
 
   if (!sessions || sessions.length === 0) return [];
 
@@ -101,9 +108,9 @@ export async function fetchLeaderboard(
     }
   }
 
-  return Array.from(aggregated.values()).sort(
-    (a, b) => b.totalNet - a.totalNet
-  );
+  return Array.from(aggregated.values())
+    .sort((a, b) => b.totalNet - a.totalNet)
+    .slice(0, LEADERBOARD_TOP_N);
 }
 
 // ── Session ────────────────────────────────────────────
@@ -125,7 +132,8 @@ export async function fetchSessionPlayers(
     .from("session_players")
     .select("*, profiles:user_id(id, username, display_name, avatar_url)")
     .eq("session_id", sessionId)
-    .order("net_result", { ascending: false });
+    .order("net_result", { ascending: false })
+    .limit(50);
   return (data ?? []) as SessionPlayerWithProfile[];
 }
 
@@ -135,7 +143,8 @@ export async function fetchSessionSuperlatives(
   const { data } = await supabase
     .from("session_superlatives")
     .select("*")
-    .eq("session_id", sessionId);
+    .eq("session_id", sessionId)
+    .limit(20);
   return (data ?? []) as SessionSuperlative[];
 }
 
@@ -145,7 +154,8 @@ export async function fetchSessionTransactions(
   const { data } = await supabase
     .from("transactions")
     .select("*")
-    .eq("session_id", sessionId);
+    .eq("session_id", sessionId)
+    .limit(100);
   return (data ?? []) as Transaction[];
 }
 
@@ -178,7 +188,6 @@ export async function fetchSessionWithDetails(sessionId: string) {
     0
   );
 
-  // Find shark for OG description
   const sharkSuperlative = superlatives.find((s) => s.type === "shark");
   const sharkPlayer = sharkSuperlative
     ? players.find((p) => p.id === sharkSuperlative.session_player_id)
@@ -219,7 +228,8 @@ export async function fetchRecentSessions(
       .from("session_players")
       .select("*, profiles:user_id(id, username, display_name, avatar_url)")
       .eq("session_id", session.id)
-      .order("net_result", { ascending: false });
+      .order("net_result", { ascending: false })
+      .limit(50);
 
     const playerList = (players ?? []) as SessionPlayerWithProfile[];
     const topPlayer = playerList[0];
