@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
   variable: "--font-display",
 });
@@ -45,8 +45,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={fraunces.variable}>
-      <body className="min-h-screen bg-bg-primary font-sans text-text-primary antialiased">
+    <html lang="en" className={jakarta.variable}>
+      <body className="min-h-screen bg-bg-primary font-display text-text-primary antialiased">
         {children}
       </body>
     </html>
