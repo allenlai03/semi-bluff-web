@@ -5,7 +5,6 @@ import type { ComponentType } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AppStoreBadge, AndroidComingSoon } from "@/components/AppStoreBadge";
-// AppStoreBadge + AndroidComingSoon remain in use on the closer; not in the hero.
 
 export const metadata: Metadata = {
   title: "Straddled — Poker night, itemized.",
@@ -70,12 +69,25 @@ export default function Home() {
               <span className="block">Share the receipt.</span>
             </h1>
 
+            <p className="mt-7 max-w-[480px] text-[15px] leading-[1.6] text-white/60 md:mt-8 md:text-[17px]">
+              Track every buy-in and rebuy in real time. Straddled does the
+              math and drops a receipt your group chat will actually open.
+            </p>
+
+            <div className="mt-9 flex flex-col items-start gap-4">
+              <AppStoreBadge size="lg" label="Get the app" />
+              <AndroidComingSoon />
+            </div>
+
             {/* The receipt, as a flat image — its own felt-green header is the only "panel." */}
             <div className="mt-20 flex justify-center md:mt-28">
               <img
                 src="/screenshots/receipt-share.png"
                 alt="Straddled settlement receipt — Sunday Sesh, $80 pot, four players, awards and settle-up."
-                className="w-[300px] rounded-[28px] md:w-[420px]"
+                width={1080}
+                height={3134}
+                fetchPriority="high"
+                className="h-auto w-[300px] rounded-[28px] md:w-[420px]"
               />
             </div>
           </div>
@@ -117,7 +129,10 @@ export default function Home() {
                   <img
                     src="/screenshots/live-session.png"
                     alt="Live session screen: Sunday Sesh, $80 pot, three players, Cash Out CTA."
-                    className="w-[220px] rounded-[28px] md:w-[260px]"
+                    width={1290}
+                    height={2626}
+                    loading="lazy"
+                    className="h-auto w-[220px] rounded-[28px] md:w-[260px]"
                   />
                 </div>
               </article>
@@ -138,7 +153,10 @@ export default function Home() {
                   <img
                     src="/screenshots/settlement.png"
                     alt="Settlement screen: results, awards, settle-up for Sunday Sesh."
-                    className="w-[220px] rounded-[28px] md:w-[260px]"
+                    width={1290}
+                    height={2626}
+                    loading="lazy"
+                    className="h-auto w-[220px] rounded-[28px] md:w-[260px]"
                   />
                 </div>
               </article>
@@ -277,7 +295,10 @@ export default function Home() {
                 <img
                   src="/screenshots/receipt-raw.png"
                   alt="Straddled receipt detail — results, awards, settle-up."
-                  className="w-[280px] rounded-[32px] md:w-[340px]"
+                  width={1080}
+                  height={3134}
+                  loading="lazy"
+                  className="h-auto w-[280px] rounded-[32px] md:w-[340px]"
                 />
               </div>
             </div>
@@ -321,7 +342,10 @@ export default function Home() {
                   <img
                     src="/screenshots/home.png"
                     alt="Home tab showing $220 across last 5 games, 80% win rate, 2-week streak."
-                    className="w-[220px] rounded-[28px] md:w-[260px]"
+                    width={1290}
+                    height={2626}
+                    loading="lazy"
+                    className="h-auto w-[220px] rounded-[28px] md:w-[260px]"
                   />
                 </div>
               </article>
@@ -341,7 +365,10 @@ export default function Home() {
                   <img
                     src="/screenshots/stats.png"
                     alt="Stats tab: total earnings +$120, biggest win +$70, biggest loss -$40, 80% win rate."
-                    className="w-[220px] rounded-[28px] md:w-[260px]"
+                    width={1290}
+                    height={2626}
+                    loading="lazy"
+                    className="h-auto w-[220px] rounded-[28px] md:w-[260px]"
                   />
                 </div>
               </article>

@@ -12,27 +12,36 @@ export const Footer = () => {
           </span>
         </Link>
 
-        <nav className="flex flex-wrap items-center gap-5 text-[13px] text-white/50 md:gap-7">
+        <nav className="-my-2 flex flex-wrap items-center gap-x-5 gap-y-1 text-[13px] text-white/50 md:gap-x-7">
           <a
             href="mailto:hello@straddled.app"
-            className="transition-colors hover:text-white"
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-white"
           >
             Contact
           </a>
-          <Link href="/support" className="transition-colors hover:text-white">
+          <Link
+            href="/support"
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-white"
+          >
             Support
           </Link>
-          <Link href="/privacy" className="transition-colors hover:text-white">
+          <Link
+            href="/privacy"
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-white"
+          >
             Privacy
           </Link>
-          <Link href="/terms" className="transition-colors hover:text-white">
+          <Link
+            href="/terms"
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-white"
+          >
             Terms
           </Link>
           <a
             href="https://x.com/straddledapp"
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-colors hover:text-white"
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-white"
           >
             X
           </a>
@@ -40,11 +49,13 @@ export const Footer = () => {
             href="https://instagram.com/straddledapp"
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-colors hover:text-white"
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-white"
           >
             Instagram
           </a>
-          <span className="text-white/30">© 2026 Straddled</span>
+          <span className="inline-flex min-h-[44px] items-center text-white/30">
+            © 2026 Straddled
+          </span>
         </nav>
       </div>
     </footer>
