@@ -18,64 +18,70 @@ export default function WSOPPage() {
     <>
       <Header />
       <main className="bg-black">
-        {/* ─────────────── HERO ─────────────── */}
-        <section className="px-6 pt-28 md:px-10 md:pt-40">
-          <div className="mx-auto max-w-6xl">
-            <div
-              className="grain relative overflow-hidden rounded-3xl px-7 py-16 md:px-14 md:py-24"
-              style={{ background: feltPanel }}
+        {/* ─────────────── HERO — full-bleed felt arrival ─────────────── */}
+        <section
+          className="grain relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-6 py-28 text-center md:px-10"
+          style={{ background: feltPanel }}
+        >
+          {/* Barely-there oversized chip watermark behind the content */}
+          <img
+            src="/brand/logo.png"
+            alt=""
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none opacity-[0.05]"
+            style={{ width: "min(680px, 115vw)", height: "auto" }}
+          />
+
+          <div className="relative z-10 flex flex-col items-center">
+            {/* The chip — the star. Mirrors the one in their hand. */}
+            <img
+              src="/brand/logo.png"
+              alt="The Straddled chip — the same mark on the chip in your hand."
+              width={1200}
+              height={1200}
+              fetchPriority="high"
+              className="h-[104px] w-[104px] rounded-[26px] ring-1 ring-[#D4B370]/30 md:h-[132px] md:w-[132px] md:rounded-[32px]"
+            />
+
+            <span className="mt-6 inline-flex items-center rounded-full border border-[#D4B370]/40 px-4 py-1.5 text-[10px] uppercase tracking-[0.22em] text-[#E8C988]">
+              Handed to you · Not for sale
+            </span>
+
+            <h1
+              className="font-display mt-7 text-white"
+              style={{
+                fontSize: "clamp(2.75rem, 13vw, 7rem)",
+                fontWeight: 500,
+                lineHeight: 0.98,
+                letterSpacing: "-0.02em",
+              }}
             >
-              <div className="relative z-10">
-                <p className="eyebrow text-white/80">
-                  WSOP 2026 · Las Vegas
-                </p>
-                <h1
-                  className="font-display mt-8 text-white"
-                  style={{
-                    fontSize: "clamp(1.75rem, 7.5vw, 8rem)",
-                    fontWeight: 500,
-                    lineHeight: 1,
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  <span className="block">You kept</span>
-                  <span className="block">the chip.</span>
-                </h1>
-                <p className="mt-8 max-w-[520px] text-[16px] leading-[1.6] text-white/75 md:text-[17px]">
-                  Thanks for grabbing one. Straddled is the app I built — it&apos;s
-                  how I keep track of every home game I run. The chip in your
-                  pocket looks like its logo because the logo looks like a chip.
-                </p>
+              <span className="block">You kept</span>
+              <span className="block">the chip.</span>
+            </h1>
 
-                <div className="mt-10 flex flex-wrap items-center gap-5">
-                  <AppStoreBadge size="lg" label="Get the app" />
-                  <AndroidComingSoon />
-                </div>
+            <p className="mt-6 max-w-[440px] text-[16px] leading-[1.6] text-white/75 md:text-[17px]">
+              It&apos;s the logo of a poker app I built. The chip looks like the
+              logo because the logo looks like a chip. Here it is.
+            </p>
 
-                {/* The chip — visible reference to the one you're holding */}
-                <div className="mt-16 flex items-center gap-5 md:mt-20">
-                  <img
-                    src="/brand/logo.png"
-                    alt="Straddled chip logo — the same mark on the chip in your pocket."
-                    className="h-20 w-20 md:h-24 md:w-24"
-                    style={{ borderRadius: 18 }}
-                  />
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.18em] text-white/50">
-                      The chip you&apos;re holding
-                    </p>
-                    <p className="mt-2 text-[14px] leading-[1.55] text-white/70 md:text-[15px]">
-                      Same dashed-gold mark. Same app. Keep it — it&apos;s yours.
-                    </p>
-                  </div>
-                </div>
-              </div>
+            <div className="mt-9 flex flex-col items-center gap-4">
+              <AppStoreBadge size="lg" label="Get the app" />
+              <AndroidComingSoon />
             </div>
           </div>
+
+          {/* Scroll cue */}
+          <a
+            href="#what"
+            className="absolute bottom-4 left-1/2 z-10 inline-flex min-h-[44px] -translate-x-1/2 items-center px-4 text-[11px] uppercase tracking-[0.22em] text-white/50 transition-colors hover:text-white"
+          >
+            What is this <span aria-hidden>↓</span>
+          </a>
         </section>
 
         {/* ─────────────── WHAT IS STRADDLED ─────────────── */}
-        <section className="px-6 pt-32 md:px-10 md:pt-44">
+        <section id="what" className="scroll-mt-24 px-6 pt-32 md:px-10 md:pt-44">
           <div className="mx-auto max-w-6xl">
             <p className="eyebrow">What is Straddled</p>
             <h2
@@ -112,7 +118,10 @@ export default function WSOPPage() {
                   <img
                     src="/screenshots/live-session.png"
                     alt="Live session screen: Sunday Sesh, $80 pot, three players."
-                    className="w-[200px] rounded-[24px] md:w-[240px]"
+                    width={1290}
+                    height={2626}
+                    loading="lazy"
+                    className="h-auto w-[200px] rounded-[24px] md:w-[240px]"
                   />
                 </div>
               </article>
@@ -132,7 +141,10 @@ export default function WSOPPage() {
                   <img
                     src="/screenshots/receipt-share.png"
                     alt="Straddled settlement receipt — Sunday Sesh, $80 pot, four players."
-                    className="w-[200px] rounded-[24px] md:w-[240px]"
+                    width={1080}
+                    height={3134}
+                    loading="lazy"
+                    className="h-auto w-[200px] rounded-[24px] md:w-[240px]"
                   />
                 </div>
               </article>

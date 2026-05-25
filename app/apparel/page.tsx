@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -28,6 +27,12 @@ const products: Product[] = [
 
 const feltPanel =
   "radial-gradient(ellipse at center, #1A6B52 0%, #0F5340 45%, #0A3D2E 100%)";
+
+// Nothing is buyable yet — every tile funnels to the same notify email as the closer.
+const NOTIFY_HREF =
+  "mailto:hello@straddled.app?subject=Notify%20me%20%E2%80%94%20Straddled%20Apparel";
+
+const [featured, ...rest] = products;
 
 export default function ApparelPage() {
   return (
@@ -88,7 +93,7 @@ export default function ApparelPage() {
             </p>
             <a
               href="#collection"
-              className="mt-10 inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.22em] text-[#E8C988] transition-colors hover:text-white"
+              className="mt-8 -mb-2 inline-flex min-h-[44px] items-center gap-2 py-2 text-[12px] uppercase tracking-[0.22em] text-[#E8C988] transition-colors hover:text-white"
             >
               View the collection
               <span aria-hidden>→</span>
@@ -99,28 +104,19 @@ export default function ApparelPage() {
         {/* ─────────────── COLLECTION HEADER ─────────────── */}
         <section id="collection" className="px-6 pt-24 md:px-10 md:pt-36">
           <div className="mx-auto max-w-6xl">
-            <div className="flex flex-col gap-6 border-b border-[#D4B370]/[0.18] pb-8 md:flex-row md:items-end md:justify-between md:pb-10">
-              <div>
-                <p className="eyebrow">Spring 2026 — Limited Run</p>
-                <h2
-                  className="font-display mt-4 text-white"
-                  style={{
-                    fontSize: "clamp(2rem, 6vw, 4.5rem)",
-                    fontWeight: 500,
-                    lineHeight: 1.05,
-                    letterSpacing: "-0.015em",
-                  }}
-                >
-                  The Collection
-                </h2>
-              </div>
-              <a
-                href="#"
-                className="inline-flex items-center gap-2 self-start text-[12px] uppercase tracking-[0.22em] text-[#D4B370] underline decoration-[#D4B370]/30 underline-offset-[6px] transition-colors hover:text-[#E8C988] md:self-end"
+            <div className="flex flex-col gap-3 border-b border-[#D4B370]/[0.18] pb-8 md:pb-10">
+              <p className="eyebrow">Spring 2026 — Limited Run</p>
+              <h2
+                className="font-display text-white"
+                style={{
+                  fontSize: "clamp(2rem, 6vw, 4.5rem)",
+                  fontWeight: 500,
+                  lineHeight: 1.05,
+                  letterSpacing: "-0.015em",
+                }}
               >
-                View all
-                <span aria-hidden>→</span>
-              </a>
+                The Collection
+              </h2>
             </div>
           </div>
         </section>
@@ -128,9 +124,13 @@ export default function ApparelPage() {
         {/* ─────────────── PRODUCT GRID ─────────────── */}
         <section className="px-6 pb-32 pt-12 md:px-10 md:pt-16">
           <div className="mx-auto max-w-6xl">
-            <div className="grid grid-cols-2 gap-6 md:grid-cols-3 md:gap-8">
-              {products.map((p) => (
-                <ProductCard key={p.id} product={p} />
+            {/* Featured piece — large felt-green card, numbered 01 */}
+            <FeaturedCard product={featured} />
+
+            {/* The rest — 02 through 06 */}
+            <div className="mt-6 grid grid-cols-2 gap-6 md:mt-8 md:grid-cols-3 md:gap-8">
+              {rest.map((p, i) => (
+                <ProductCard key={p.id} product={p} number={i + 2} />
               ))}
             </div>
           </div>
@@ -180,15 +180,76 @@ export default function ApparelPage() {
   );
 }
 
-function ProductCard({ product }: { product: Product }) {
+// Featured marquee — large felt-green card with no photo; the felt carries it.
+function FeaturedCard({ product }: { product: Product }) {
   return (
-    <Link
-      href="#"
+    <a
+      href={NOTIFY_HREF}
+      className="grain group relative flex min-h-[340px] flex-col justify-between overflow-hidden rounded-3xl p-8 transition-colors md:min-h-[420px] md:p-12"
+      style={{ background: feltPanel }}
+      aria-label={`${product.name} — ${product.category}, $${product.price}. Notify me when it drops.`}
+    >
+      <span
+        aria-hidden
+        className="numeral pointer-events-none absolute -right-4 -top-10 z-0 select-none md:-right-6 md:-top-16"
+        style={{
+          fontSize: "clamp(7rem, 20vw, 18rem)",
+          color: "rgba(212,179,112,0.12)",
+        }}
+      >
+        01
+      </span>
+
+      <div className="relative z-10 flex items-center justify-between">
+        <span className="text-[10px] uppercase tracking-[0.22em] text-white/50">
+          Coming soon
+        </span>
+        <span className="eyebrow text-white/70">Featured</span>
+      </div>
+
+      <div className="relative z-10">
+        <p className="eyebrow text-white/70">{product.category}</p>
+        <h3
+          className="font-display mt-3 text-white"
+          style={{
+            fontSize: "clamp(2.25rem, 6vw, 4rem)",
+            fontWeight: 500,
+            lineHeight: 1,
+            letterSpacing: "-0.02em",
+          }}
+        >
+          {product.name}
+        </h3>
+        <p className="nums mt-4 text-[18px] font-semibold text-[#E8C988]">
+          ${product.price}
+        </p>
+      </div>
+    </a>
+  );
+}
+
+function ProductCard({
+  product,
+  number,
+}: {
+  product: Product;
+  number: number;
+}) {
+  return (
+    <a
+      href={NOTIFY_HREF}
       className="group block"
-      aria-label={`${product.name} — ${product.category}, $${product.price}`}
+      aria-label={`${product.name} — ${product.category}, $${product.price}. Notify me when it drops.`}
     >
       {/* Square photo placeholder — chip mark on dark; real photo replaces this later. */}
       <div className="relative aspect-square overflow-hidden rounded-2xl border border-[#D4B370]/[0.12] bg-[#0E0E0E] transition-colors group-hover:border-[#D4B370]/[0.25]">
+        <span
+          aria-hidden
+          className="numeral pointer-events-none absolute right-3 top-1 z-10 select-none transition-colors group-hover:[color:rgba(212,179,112,0.32)] md:right-4"
+          style={{ fontSize: "4.5rem" }}
+        >
+          {String(number).padStart(2, "0")}
+        </span>
         <img
           src="/brand/logo.png"
           alt=""
@@ -196,7 +257,7 @@ function ProductCard({ product }: { product: Product }) {
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.16] transition-opacity group-hover:opacity-[0.22]"
           style={{ width: "55%", height: "auto" }}
         />
-        <span className="absolute left-4 top-4 text-[10px] uppercase tracking-[0.22em] text-white/40">
+        <span className="absolute left-4 top-4 z-10 text-[10px] uppercase tracking-[0.22em] text-white/40">
           Coming soon
         </span>
       </div>
@@ -212,6 +273,6 @@ function ProductCard({ product }: { product: Product }) {
           ${product.price}
         </p>
       </div>
-    </Link>
+    </a>
   );
 }
