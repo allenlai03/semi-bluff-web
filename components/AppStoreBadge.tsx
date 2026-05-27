@@ -6,7 +6,7 @@ type AppStoreBadgeProps = {
 };
 
 const APP_STORE_URL =
-  "https://apps.apple.com/app/straddled/id0000000000";
+  "https://apps.apple.com/us/app/straddled/id6766053280";
 
 export const AppStoreBadge = ({
   size = "default",
