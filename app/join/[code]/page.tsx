@@ -18,12 +18,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const group = await fetchGroupByInviteCode(code);
   if (!group) return { title: "Invite" };
 
+  const ogImage = `/api/og/group/${group.slug}`;
+
   return {
     title: `Join ${group.name}`,
     description: `You've been invited to join ${group.name} on Straddled.`,
     openGraph: {
       title: `Join ${group.name} on Straddled`,
       description: `You've been invited to join ${group.name}.`,
+      images: [ogImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Join ${group.name} on Straddled`,
+      description: `You've been invited to join ${group.name}.`,
+      images: [ogImage],
     },
   };
 }
