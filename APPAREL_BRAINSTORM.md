@@ -1,5 +1,15 @@
 # `/apparel` — Brainstorm
 
+> **RESOLVED (shipped).** `/apparel` is built in `app/apparel/page.tsx`. It took the
+> **Vault**'s numeral system (the homepage Awards `01–06` serif numerals, here as edition
+> numbers) and a **featured + grid** layout: one large felt-green marquee piece (01) over a
+> grid of the rest (02–06). No photography exists yet, so every tile is a logo watermark +
+> "Coming soon"; tiles and the closer funnel to a single "notify me" email rather than a
+> store. The notes below are kept as historical context for the three directions considered.
+
+---
+
+
 Three diverging directions for the `straddled.app/apparel` merch storefront. All inherit the homepage's design system (black + gold `#D4B370` + felt-green premium panels + Fraunces serif + Inter body + casino grain). All assume a small, intentional drop — ~6 pieces (cap, hoodie, tee, deck, chip set, one wildcard) that link out to Shopify or read "Reserve / Coming soon."
 
 Pick one. Or take the strongest move from each and we combine.

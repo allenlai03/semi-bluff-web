@@ -132,6 +132,15 @@ Wrap the inner content in `<div className="relative z-10">` so it sits above the
 
 Use this for: hero section background panel, final CTA section, the headline award card, group/session page headers. **Not** for everyday content cards.
 
+#### Full-bleed felt hero (arrival pages)
+
+`/wsop` and `/apparel` use felt at full section width — not a rounded card — as an immersive
+arrival moment (`min-h-[100svh]` on `/wsop`, the QR-scan target). This is sanctioned by "the
+hero gradient" above; it's the one place felt goes edge-to-edge. Rules: still `.grain`, still
+`relative z-10` content, use `100svh` (not `vh`) so it fits mobile browser chrome, and center
+the content. Reserve this for pages that are a single branded moment — don't use it for the
+homepage (which is felt-on-black with the receipt, not a felt hero).
+
 ### Grain texture — the casino-felt finish
 
 Every felt-green panel uses the `.grain` utility (defined in `globals.css`). It paints a tiny inline-SVG fractal-noise overlay at 8% opacity with `mix-blend-mode: overlay`. The effect is barely visible up close — but at a glance it stops the felt panels from feeling like flat CSS gradients and gives them the texture of actual table cloth.
@@ -187,6 +196,8 @@ Treatment:
 Live images are stored in `/public/screenshots/`. Source files come from `Straddled 6.7/` (iPhone 15 Pro Max simulator captures).
 
 **Mandatory cleanup before use:** crop the top 170px of each iPhone screenshot to remove the system status bar and Dynamic Island pill — leaving them in makes the marketing site look tacky. Use `sharp` (installed via `node_modules`) to crop programmatically.
+
+**Always set `width` + `height` (the real pixel dimensions) and `h-auto`** on every screenshot `<img>`, so the browser reserves space and the page doesn't shift as images load — critical on mobile. Hero images get `fetchPriority="high"`; everything below the fold gets `loading="lazy"`. Current source dimensions: tab captures are `1290×2626`, the tall receipts are `1080×3134`.
 
 Current screens in use on the homepage:
 - `receipt-share.png` — flat receipt, hero

@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Straddled — Web
 
-## Getting Started
+Marketing + share layer for **Straddled**, the poker session tracker for friend groups
+([App Store](https://apps.apple.com/us/app/straddled/id6766053280)). This site is the
+public face of the app: the landing page, the WSOP chip-scan page, the apparel drop, and
+the dynamic share/invite pages that unfurl in group chats.
 
-First, run the development server:
+The visual design is intentionally a 1:1 match with the iOS app — casino felt + gold chips
+on a black table. **`CLAUDE.md` is the source of truth for all visual design.** Read it
+before touching anything visual.
+
+## Stack
+
+- **Next.js 16** (App Router) + **TypeScript**
+- **Tailwind CSS v4** (config-in-CSS via `app/globals.css`)
+- **Supabase** (`@supabase/supabase-js`) — reads group/session/leaderboard data for the
+  dynamic share pages
+- **`@vercel/og`** — generates Open Graph preview images at the edge
+- **`lucide-react`** — icons (stroke 1.5, no fills)
+- Fonts via `next/font/google`: **Fraunces** (display) + **Inter** (body/UI)
+
+No UI libraries (no shadcn/Radix). No animation libraries — CSS transitions only.
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Dynamic pages (`/g`, `/s`, `/join`, OG routes) need Supabase env vars in `.env.local`:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Other scripts: `npm run build`, `npm run start`, `npm run lint`.
 
-## Learn More
+## Routes
 
-To learn more about Next.js, take a look at the following resources:
+| Route | What it is |
+|-------|------------|
+| `/` | Landing page (the reference implementation of the design system) |
+| `/wsop` | Chip-scan landing — full-bleed felt hero, the QR target on physical chips |
+| `/apparel` | Drop 01 storefront (featured + numbered grid; "notify me" funnel) |
+| `/join/[code]` | Invite-link landing; unfurls with the group's OG card |
+| `/g/[slug]` | Public group leaderboard |
+| `/s/[id]` | Public session receipt |
+| `/api/og/group/[slug]` | Dynamic OG image — felt header + leaderboard |
+| `/api/og/session/[id]` | Dynamic OG image — session receipt |
+| `/privacy`, `/terms`, `/support` | Legal / help |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project shape
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `app/` — routes (App Router)
+- `components/` — hand-built primitives (`Header`, `Footer`, `AppStoreBadge`, `BrandMark`, …)
+- `lib/queries.ts` — Supabase data access
+- `types/` — shared types
+- `public/screenshots/` — cropped iOS captures used across the site
+- `public/brand/` — logo (`logo.png` / `logo.svg`)
 
-## Deploy on Vercel
+The App Store URL lives in one place — `components/AppStoreBadge.tsx` — and every "Get the
+app" CTA reads from it.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Conventions worth knowing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Match the app, not generic SaaS.** See `CLAUDE.md` → "What AI slop looks like."
+- **Screenshots always carry `width`/`height`** (their real pixel dimensions) + `h-auto` to
+  prevent layout shift; below-fold images use `loading="lazy"`.
+- **Touch targets ≥ 44px** on interactive elements; mobile is the primary surface for
+  `/wsop` (it's a QR target) and `/join`.
+
+## Deploy
+
+Vercel. `main` is the production branch.
