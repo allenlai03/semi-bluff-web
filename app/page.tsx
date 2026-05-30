@@ -5,6 +5,7 @@ import type { ComponentType } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AppStoreBadge, AndroidComingSoon } from "@/components/AppStoreBadge";
+import { InstagramButton, LiveFromVegas } from "@/components/InstagramButton";
 
 export const metadata: Metadata = {
   title: "Straddled — Poker night, itemized.",
@@ -74,9 +75,15 @@ export default function Home() {
               math and drops a receipt your group chat will actually open.
             </p>
 
-            <div className="mt-9 flex flex-col items-start gap-4">
-              <AppStoreBadge size="lg" label="Get the app" />
-              <AndroidComingSoon />
+            <div className="mt-9 flex w-full flex-col items-start gap-5">
+              <div className="flex w-full flex-wrap items-center gap-3">
+                <AppStoreBadge size="lg" label="Get the app" />
+                <InstagramButton size="lg" label="Follow my story" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <LiveFromVegas />
+                <AndroidComingSoon />
+              </div>
             </div>
 
             {/* The receipt, as a flat image — its own felt-green header is the only "panel." */}

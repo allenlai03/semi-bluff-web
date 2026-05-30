@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BrandMark } from "./BrandMark";
+import { INSTAGRAM_URL } from "./InstagramButton";
 
 export const Footer = () => {
   return (
@@ -46,7 +47,7 @@ export const Footer = () => {
             X
           </a>
           <a
-            href="https://instagram.com/straddledapp"
+            href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex min-h-[44px] items-center transition-colors hover:text-white"
